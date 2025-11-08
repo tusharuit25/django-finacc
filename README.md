@@ -28,13 +28,16 @@ pip install django-finacc
 
 ```
 ## setting.py entry
+```setting.py
 INSTALLED_APPS += ["rest_framework", "finacc"]
-
-## urls.py 
+```
+## Adding Urls to project settings.py
+```setting.py
 path("api/finacc/", include("finacc.api.urls"))
 python manage.py finacc_bootstrap_coa --company=1 --template=india_basic
-
+```
 ## example 
+```posting
 POST /api/finacc/journal/entries/
 {
   "company": 1,
@@ -46,24 +49,22 @@ POST /api/finacc/journal/entries/
     {"account": 2, "debit": "0.00", "credit": "100000.00"}
   ]
 }
+```
 
-## installed app
+## App Installation In Project Setting
+```installation
 INSTALLED_APPS += ["rest_framework", "finacc"]
-
-## other settings
+```
+## Project Setting Initialization
+```initialization
 FINACC = {
     "BASE_CURRENCY": "INR",
     "AUTO_POST_ON_CREATE": True,
 }
-
-## urls.py 
-from django.urls import include, path
-
-urlpatterns = [
-    path("api/finacc/", include("finacc.api.urls")),
-]
-
+```
+ 
 ## example
+```usage
 from decimal import Decimal
 from finacc.posting.rules import create_simple_entry
 from finacc.posting.engine import post_entry
@@ -80,7 +81,7 @@ def post_invoice(company, invoice):
     # map lines -> AR, Revenue, Tax
     ...
     return post_entry(je)
-
+```
 
 ## Implementation Notes & Roadmap
 
